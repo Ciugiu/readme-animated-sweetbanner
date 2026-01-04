@@ -1,6 +1,11 @@
 <h1 align="center">Animated Sweet Banner</h1>
 
 <div align="center">
+    <a href="https://sweetbanner.github.io"><img src="https://img.shields.io/badge/🪐_Try_Now-sweetbanner.github.io-f59e0b?style=for-the-badge" alt="Live Demo"/></a>
+</div>
+<br/>
+
+<div align="center">
     <a href="https://github.com/SystemVll/readme-animated-sweetbanner/stargazers"><img src="https://img.shields.io/github/stars/SystemVll/readme-animated-sweetbanner" alt="Stars Badge"/></a>
     <a href="https://github.com/SystemVll/readme-animated-sweetbanner/network/members"><img src="https://img.shields.io/github/forks/SystemVll/readme-animated-sweetbanner" alt="Forks Badge"/></a>
     <a href="https://github.com/SystemVll/readme-animated-sweetbanner/pulls"><img src="https://img.shields.io/github/issues-pr/SystemVll/readme-animated-sweetbanner" alt="Pull Requests Badge"/></a>
