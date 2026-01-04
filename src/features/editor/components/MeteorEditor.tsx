@@ -1,0 +1,223 @@
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { Slider } from "@/components/ui/slider";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { cn } from "@/lib/utils";
+import type { MeteorConfig, DevIcon } from "@/features/shared";
+import { getDevIconUrl } from "@/features/shared";
+
+interface MeteorEditorProps {
+    selectedMeteorData: MeteorConfig | undefined;
+    updateMeteor: (id: string, updates: Partial<MeteorConfig>) => void;
+    filteredIcons: DevIcon[];
+    isLoadingIcons: boolean;
+    iconSearch: string;
+    setIconSearch: (search: string) => void;
+}
+
+export function MeteorEditor({
+    selectedMeteorData,
+    updateMeteor,
+    filteredIcons,
+    isLoadingIcons,
+    iconSearch,
+    setIconSearch,
+}: MeteorEditorProps) {
+    return (
+        <Card className="flex-1 min-w-0 flex flex-col min-h-0">
+            <CardHeader className="pb-2 shrink-0">
+                <CardTitle className="text-sm">
+                    {selectedMeteorData ? "Edit Meteor" : "Select a Meteor"}
+                </CardTitle>
+            </CardHeader>
+            <CardContent className="flex-1 flex flex-col min-h-0">
+                {selectedMeteorData ? (
+                    <div className="grid grid-cols-2 gap-6 flex-1 min-h-0">
+                        <div className="space-y-3 flex flex-col min-h-0">
+                            <Label className="shrink-0">Icon (Simple Icons)</Label>
+                            <Input
+                                placeholder="Search icons..."
+                                value={iconSearch}
+                                onChange={(e) => setIconSearch(e.target.value)}
+                                className="shrink-0"
+                            />
+                            <ScrollArea className="flex-1 min-h-0 border rounded-md p-2">
+                                {isLoadingIcons ? (
+                                    <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+                                        Loading icons...
+                                    </div>
+                                ) : (
+                                    <div className="grid grid-cols-5 gap-2">
+                                        {filteredIcons.map((icon) => (
+                                            <button
+                                                key={icon.name}
+                                                onClick={() => {
+                                                    updateMeteor(selectedMeteorData.id, {
+                                                        iconSlug: icon.name,
+                                                        trailColor: icon.color,
+                                                    });
+                                                }}
+                                                className={cn(
+                                                    "flex flex-col items-center gap-1 p-2 rounded-md transition-colors hover:bg-muted",
+                                                    selectedMeteorData.iconSlug === icon.name &&
+                                                    "bg-primary/10 ring-1 ring-primary"
+                                                )}
+                                                title={icon.name}
+                                            >
+                                                <img
+                                                    src={getDevIconUrl(icon.name)}
+                                                    alt={icon.name}
+                                                    className="size-6"
+                                                />
+                                                <span className="text-[9px] text-muted-foreground truncate max-w-full">
+                                                    {icon.name}
+                                                </span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                            </ScrollArea>
+                            <div className="space-y-1">
+                                <Label className="text-[10px]">Custom Icon Slug</Label>
+                                <Input
+                                    value={selectedMeteorData.iconSlug}
+                                    onChange={(e) =>
+                                        updateMeteor(selectedMeteorData.id, {
+                                            iconSlug: e.target.value,
+                                        })
+                                    }
+                                    placeholder="e.g., react, typescript"
+                                />
+                            </div>
+                        </div>
+                        <div className="space-y-3">
+                            <div className="space-y-1">
+                                <Label>Icon Color</Label>
+                                <div className="flex gap-2">
+                                    <Input
+                                        type="color"
+                                        value={selectedMeteorData.iconColor}
+                                        onChange={(e) =>
+                                            updateMeteor(selectedMeteorData.id, {
+                                                iconColor: e.target.value,
+                                            })
+                                        }
+                                        className="w-10 h-7 p-0.5 cursor-pointer"
+                                    />
+                                    <Input
+                                        value={selectedMeteorData.iconColor}
+                                        onChange={(e) =>
+                                            updateMeteor(selectedMeteorData.id, {
+                                                iconColor: e.target.value,
+                                            })
+                                        }
+                                        className="flex-1"
+                                    />
+                                </div>
+                            </div>
+                            <div className="space-y-1">
+                                <Label>Trail Color</Label>
+                                <div className="flex gap-2">
+                                    <Input
+                                        type="color"
+                                        value={selectedMeteorData.trailColor}
+                                        onChange={(e) =>
+                                            updateMeteor(selectedMeteorData.id, {
+                                                trailColor: e.target.value,
+                                            })
+                                        }
+                                        className="w-10 h-7 p-0.5 cursor-pointer"
+                                    />
+                                    <Input
+                                        value={selectedMeteorData.trailColor}
+                                        onChange={(e) =>
+                                            updateMeteor(selectedMeteorData.id, {
+                                                trailColor: e.target.value,
+                                            })
+                                        }
+                                        className="flex-1"
+                                    />
+                                </div>
+                            </div>
+
+                            <Separator />
+
+                            <div className="space-y-1">
+                                <Label>
+                                    Duration: {selectedMeteorData.duration.toFixed(1)}s
+                                </Label>
+                                <Slider
+                                    value={[selectedMeteorData.duration]}
+                                    onValueChange={([v]) =>
+                                        updateMeteor(selectedMeteorData.id, { duration: v })
+                                    }
+                                    min={0.5}
+                                    max={5}
+                                    step={0.1}
+                                />
+                            </div>
+
+                            <div className="space-y-1">
+                                <Label>
+                                    Delay: {selectedMeteorData.delay.toFixed(1)}s
+                                </Label>
+                                <Slider
+                                    value={[selectedMeteorData.delay]}
+                                    onValueChange={([v]) =>
+                                        updateMeteor(selectedMeteorData.id, { delay: v })
+                                    }
+                                    min={0}
+                                    max={5}
+                                    step={0.1}
+                                />
+                            </div>
+
+                            <Separator />
+
+                            <div className="grid grid-cols-2 gap-2">
+                                <div className="space-y-1">
+                                    <Label className="text-[10px]">Start X</Label>
+                                    <Input
+                                        type="number"
+                                        value={selectedMeteorData.startX}
+                                        onChange={(e) =>
+                                            updateMeteor(selectedMeteorData.id, {
+                                                startX: parseInt(e.target.value) || 0,
+                                            })
+                                        }
+                                    />
+                                </div>
+                                <div className="space-y-1">
+                                    <Label className="text-[10px]">Angle (degrees)</Label>
+                                    <Input
+                                        type="number"
+                                        min={0}
+                                        max={180}
+                                        value={selectedMeteorData.angle}
+                                        onChange={(e) =>
+                                            updateMeteor(selectedMeteorData.id, {
+                                                angle: parseInt(e.target.value) || 60,
+                                            })
+                                        }
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="flex h-40 items-center justify-center text-muted-foreground">
+                        Select a meteor from the list to edit its properties
+                    </div>
+                )}
+            </CardContent>
+        </Card>
+    );
+}
+
