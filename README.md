@@ -1,4 +1,13 @@
-# Animated Sweet Banner
+<h1 align="center">Animated Sweet Banner</h1>
+
+<div align="center">
+    <a href="https://github.com/SystemVll/readme-animated-sweetbanner/stargazers"><img src="https://img.shields.io/github/stars/SystemVll/readme-animated-sweetbanner" alt="Stars Badge"/></a>
+    <a href="https://github.com/SystemVll/readme-animated-sweetbanner/network/members"><img src="https://img.shields.io/github/forks/SystemVll/readme-animated-sweetbanner" alt="Forks Badge"/></a>
+    <a href="https://github.com/SystemVll/readme-animated-sweetbanner/pulls"><img src="https://img.shields.io/github/issues-pr/SystemVll/readme-animated-sweetbanner" alt="Pull Requests Badge"/></a>
+    <a href="https://github.com/SystemVll/readme-animated-sweetbanner/issues"><img src="https://img.shields.io/github/issues/SystemVll/readme-animated-sweetbanner" alt="Issues Badge"/></a>
+    <a href="https://github.com/SystemVll/readme-animated-sweetbanner/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/SystemVll/readme-animated-sweetbanner?color=2b9348"></a>
+    <a href="https://github.com/SystemVll/readme-animated-sweetbanner/blob/master/LICENSE"><img src="https://img.shields.io/github/license/SystemVll/readme-animated-sweetbanner?color=2b9348" alt="License Badge"/></a>
+</div>
 
 A web-based editor for creating animated SVG banners for GitHub profiles. Build custom sweet banners with meteors, glowing avatars, and animated effects.
 
