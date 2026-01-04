@@ -28,13 +28,13 @@ export function App() {
     const svgDataUrl = `data:image/svg+xml,${encodeURIComponent(svgCode)}`;
 
     return (
-        <div className="flex h-screen w-full flex-col gap-4 p-4 bg-background">
+        <div className="flex min-h-screen w-full flex-col gap-4 p-2 sm:p-4 bg-background">
             <BannerPreview
                 svgCode={svgCode}
                 svgDataUrl={svgDataUrl}
                 width={config.width}
             />
-            <div className="flex flex-1 gap-4 min-h-0">
+            <div className="flex flex-col lg:flex-row flex-1 gap-4 min-h-0">
                 <SettingsPanel
                     config={config}
                     selectedMeteor={selectedMeteor}

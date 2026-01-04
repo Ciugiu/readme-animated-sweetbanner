@@ -38,7 +38,7 @@ export function SettingsPanel({
     removeMeteor,
 }: SettingsPanelProps) {
     return (
-        <Card className="w-72 shrink-0 flex flex-col min-h-0">
+        <Card className="w-full lg:w-72 shrink-0 flex flex-col min-h-0">
             <CardHeader className="pb-2 shrink-0">
                 <CardTitle className="text-sm">Settings</CardTitle>
             </CardHeader>

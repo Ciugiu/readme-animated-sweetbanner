@@ -38,7 +38,7 @@ export function BannerPreview({ svgCode, svgDataUrl, width }: BannerPreviewProps
     return (
         <Card className="shrink-0">
             <CardHeader className="pb-2">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <CardTitle className="flex items-center gap-2">
                             <SparklesIcon className="size-4" />
@@ -48,7 +48,7 @@ export function BannerPreview({ svgCode, svgDataUrl, width }: BannerPreviewProps
                             Animated SVG banner with meteor icons
                         </CardDescription>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                         <Button
                             variant="outline"
                             size="sm"

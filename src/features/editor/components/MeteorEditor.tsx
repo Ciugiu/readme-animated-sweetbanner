@@ -39,7 +39,7 @@ export function MeteorEditor({
             </CardHeader>
             <CardContent className="flex-1 flex flex-col min-h-0">
                 {selectedMeteorData ? (
-                    <div className="grid grid-cols-2 gap-6 flex-1 min-h-0">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 min-h-0">
                         <div className="space-y-3 flex flex-col min-h-0">
                             <Label className="shrink-0">Icon (Simple Icons)</Label>
                             <Input
@@ -54,7 +54,7 @@ export function MeteorEditor({
                                         Loading icons...
                                     </div>
                                 ) : (
-                                    <div className="grid grid-cols-5 gap-2">
+                                    <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
                                         {filteredIcons.map((icon) => (
                                             <button
                                                 key={icon.name}
