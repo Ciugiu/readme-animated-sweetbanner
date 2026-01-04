@@ -5,12 +5,13 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/card.tsx";
+import { Button } from "@/components/ui/button.tsx";
 import {
     DownloadIcon,
     CopyIcon,
     SparklesIcon,
+    Star,
 } from "lucide-react";
 
 interface BannerPreviewProps {
@@ -48,6 +49,21 @@ export function BannerPreview({ svgCode, svgDataUrl, width }: BannerPreviewProps
                         </CardDescription>
                     </div>
                     <div className="flex gap-2">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            asChild
+                            className="bg-zinc-900 dark:bg-zinc-800 text-white border-zinc-700 hover:bg-zinc-800 dark:hover:bg-zinc-700 hover:text-white"
+                        >
+                            <a
+                                href="https://github.com/SystemVll/readme-animated-sweetbanner"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <Star className="size-3.5 text-amber-400 fill-amber-400" />
+                                Star on GitHub
+                            </a>
+                        </Button>
                         <Button variant="outline" size="sm" onClick={copyToClipboard}>
                             <CopyIcon className="size-3.5" />
                             Copy SVG
