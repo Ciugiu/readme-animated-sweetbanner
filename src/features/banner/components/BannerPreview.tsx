@@ -53,7 +53,7 @@ export function BannerPreview({ svgCode, svgDataUrl, width }: BannerPreviewProps
                             variant="outline"
                             size="sm"
                             asChild
-                            className="bg-zinc-900 dark:bg-zinc-800 text-white border-zinc-700 hover:bg-zinc-800 dark:hover:bg-zinc-700 hover:text-white"
+                            className="snake-border bg-zinc-900 dark:bg-zinc-800 text-white border-transparent hover:bg-zinc-800 dark:hover:bg-zinc-700 hover:text-white transition-all duration-300"
                         >
                             <a
                                 href="https://github.com/SystemVll/readme-animated-sweetbanner"
