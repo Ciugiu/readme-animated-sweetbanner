@@ -6,7 +6,7 @@ export const defaultConfig: BannerConfig = {
     width: 1441,
     height: 302,
     backgroundColor: "#262c36",
-    avatarUrl: "https://avatars.githubusercontent.com/u/1?v=4",
+    avatarUrl: "https://avatars.githubusercontent.com/u/69421356?v=4",
     avatarSize: 90,
     // Particles
     particleCount: 3,
@@ -21,7 +21,7 @@ export const defaultConfig: BannerConfig = {
     glowColorEnd: "#f59e0b",
 
     // Border
-    borderEnabled: true,
+    borderEnabled: false,
     borderColor: "#f59e0b",
     borderRadius: 12,
     borderSize: 2,
