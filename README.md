@@ -9,7 +9,9 @@
     <a href="https://github.com/SystemVll/readme-animated-sweetbanner/blob/master/LICENSE"><img src="https://img.shields.io/github/license/SystemVll/readme-animated-sweetbanner?color=2b9348" alt="License Badge"/></a>
 </div>
 
-A web-based editor for creating animated SVG banners for GitHub profiles. Build custom sweet banners with meteors, glowing avatars, and animated effects.
+<p align="center">
+    A web-based editor for creating animated SVG banners for GitHub profiles. Build custom sweet banners with meteors, glowing avatars, and animated effects.
+</p>
 
 ## Example
 
