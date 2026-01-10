@@ -23,7 +23,7 @@ export const defaultConfig: BannerConfig = {
     // Border
     borderEnabled: false,
     borderColor: "#f59e0b",
-    borderRadius: 12,
+    borderRadius: 2,
     borderSize: 2,
     meteors: [
         {
