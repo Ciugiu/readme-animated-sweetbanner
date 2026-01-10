@@ -14,7 +14,7 @@
 </div>
 <br/>
 <div  align="center">
-    <img width="96" height="96" alt="icons8-sweet-96" src="https://github.com/user-attachments/assets/51742f83-d748-4b45-8512-f397ce752a15" />
+    <img width="96" height="96" alt="icons8-sweet-96" src="https://github.com/user-attachments/assets/484c1d55-7321-4c2b-9d99-0648f5c7e92f" />
 </div>
 
 <p align="center">
