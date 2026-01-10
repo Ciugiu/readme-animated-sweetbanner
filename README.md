@@ -14,7 +14,7 @@
 </div>
 <br/>
 <div  align="center">
-    <img width="96" height="96" alt="icons8-sweet-96" src="https://github.com/user-attachments/assets/484c1d55-7321-4c2b-9d99-0648f5c7e92f" />
+    <img width="96" height="96" src="https://github.com/user-attachments/assets/e3429152-086e-427c-a920-d89b8b16ccf4" />
 </div>
 
 <p align="center">
@@ -23,7 +23,7 @@
 
 ## Example
 
-![Sweet Banner Example](https://github.com/user-attachments/assets/7b0551e3-70ae-457e-b084-950150e64080)
+![Sweet Banner Example](https://github.com/user-attachments/assets/484c1d55-7321-4c2b-9d99-0648f5c7e92f)
 
 ## Features
 
