@@ -61,6 +61,10 @@ bun run build
 3. Add meteors with icons from the devicon library
 4. Customize colors, timing, and animation properties
 5. Copy the SVG code or download the file
+6. Add just the banner line at the end of the copied SVG code to the beginning of your Repos Readme.md
+    ```markdown
+    ![banner(1)](https://github.com/user-attachments/assets/...)
+    ```
 
 ## Configuration Options
 
