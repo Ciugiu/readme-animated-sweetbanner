@@ -4,7 +4,6 @@
     <a href="https://sweetbanner.github.io"><img src="https://img.shields.io/badge/🪐_Try_Now-sweetbanner.github.io-f59e0b?style=for-the-badge" alt="Live Demo"/></a>
 </div>
 <br/>
-
 <div align="center">
     <a href="https://github.com/SystemVll/readme-animated-sweetbanner/stargazers"><img src="https://img.shields.io/github/stars/SystemVll/readme-animated-sweetbanner" alt="Stars Badge"/></a>
     <a href="https://github.com/SystemVll/readme-animated-sweetbanner/network/members"><img src="https://img.shields.io/github/forks/SystemVll/readme-animated-sweetbanner" alt="Forks Badge"/></a>
@@ -12,6 +11,10 @@
     <a href="https://github.com/SystemVll/readme-animated-sweetbanner/issues"><img src="https://img.shields.io/github/issues/SystemVll/readme-animated-sweetbanner" alt="Issues Badge"/></a>
     <a href="https://github.com/SystemVll/readme-animated-sweetbanner/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/SystemVll/readme-animated-sweetbanner?color=2b9348"></a>
     <a href="https://github.com/SystemVll/readme-animated-sweetbanner/blob/master/LICENSE"><img src="https://img.shields.io/github/license/SystemVll/readme-animated-sweetbanner?color=2b9348" alt="License Badge"/></a>
+</div>
+<br/>
+<div  align="center">
+    <img width="96" height="96" alt="icons8-sweet-96" src="https://github.com/user-attachments/assets/51742f83-d748-4b45-8512-f397ce752a15" />
 </div>
 
 <p align="center">
