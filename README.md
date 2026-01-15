@@ -1,7 +1,7 @@
 <h1 align="center">Animated Sweet Banner</h1>
 
 <div align="center">
-    <a href="https://sweetbanner.github.io"><img src="https://img.shields.io/badge/🪐_Try_Now-sweetbanner.github.io-f59e0b?style=for-the-badge" alt="Live Demo"/></a>
+    <a href="https://sweetbanner.github.io" target="_blank"><img src="https://img.shields.io/badge/🪐_Try_Now-sweetbanner.github.io-f59e0b?style=for-the-badge" alt="Live Demo"/></a>
 </div>
 <br/>
 <div align="center">
