@@ -58,7 +58,7 @@ bun run build
 
 1. Configure banner dimensions and background color
 2. Set your avatar URL and size
-3. Add meteors with icons from DevIcons or Catppuccin VSCode Icons (Frappe theme)
+3. Add meteors with icons from Iconify
 4. Customize colors, timing, and animation properties
 5. Copy the SVG code or download the file
 6. Add just the banner line at the end of the copied SVG code to the beginning of your Repos Readme.md
@@ -67,11 +67,7 @@ bun run build
     ```
 
 ## Icon Libraries
-
-The editor supports two icon libraries:
-
-- **[DevIcons](https://devicon.dev/)** - Technology and programming icons (React, TypeScript, etc.)
-- **[Catppuccin VSCode Icons](https://github.com/catppuccin/vscode-icons/tree/main/icons/frappe)** - File type icons with Catppuccin Frappe theme colors
+- **[Iconify](https://iconify.design/)** - Icons aggregator. +50k icons
 
 ## Configuration Options
 
@@ -80,7 +76,7 @@ The editor supports two icon libraries:
 | Dimensions | Banner width and height |
 | Background | Solid color background |
 | Avatar | GitHub avatar URL and size |
-| Meteors | Icon (DevIcons or Catppuccin), trail color, angle, duration, delay |
+| Meteors | Icon, trail color, angle, duration, delay |
 | Particles | Floating particle count and color |
 | Waves | Animated wave gradient colors |
 | Glow | Avatar glow gradient colors |
