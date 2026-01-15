@@ -61,7 +61,7 @@ bun run build
 3. Add meteors with icons from Iconify
 4. Customize colors, timing, and animation properties
 5. Copy the SVG code or download the file
-6. Add just the banner line at the end of the copied SVG code to the beginning of your Repos Readme.md
+6. Add just the banner line at the end of the copied SVG code to the beginning of your Repos Readme.md, you can also **just drag and drop the svg file**
     ```markdown
     ![banner(1)](https://github.com/user-attachments/assets/...)
     ```
@@ -73,7 +73,7 @@ bun run build
 
 | Setting | Description |
 |---------|-------------|
-| Dimensions | Banner width and height |
+| Border | Border size, angle, and color |
 | Background | Solid color background |
 | Avatar | GitHub avatar URL and size |
 | Meteors | Icon, trail color, angle, duration, delay |
