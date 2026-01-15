@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import type { BannerConfig, MeteorConfig } from "@/features/shared";
-import { defaultConfig, fetchImageAsBase64, getDevIconUrl } from "@/features/shared";
+import { defaultConfig, fetchImageAsBase64, getIconUrl } from "@/features/shared";
 
 export function useBannerConfig() {
     const [config, setConfig] = useState<BannerConfig>(defaultConfig);
@@ -21,7 +21,7 @@ export function useBannerConfig() {
     useEffect(() => {
         config.meteors.forEach((meteor) => {
             if (!meteor.iconBase64) {
-                const iconUrl = getDevIconUrl(meteor.iconSlug);
+                const iconUrl = meteor.iconUrl || getIconUrl(meteor.iconSlug);
                 fetchImageAsBase64(iconUrl).then((base64) => {
                     if (base64) {
                         setConfig((prev) => ({
@@ -56,7 +56,7 @@ export function useBannerConfig() {
                         ? {
                             ...m,
                             ...updates,
-                            iconBase64: updates.iconSlug ? undefined : m.iconBase64,
+                            iconBase64: (updates.iconSlug !== undefined || updates.iconUrl !== undefined) ? undefined : m.iconBase64,
                         }
                         : m
                 ),

@@ -10,25 +10,26 @@ import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import type { MeteorConfig, DevIcon } from "@/features/shared";
-import { getDevIconUrl } from "@/features/shared";
+import type { MeteorConfig, UnifiedIcon } from "@/features/shared";
 
 interface MeteorEditorProps {
     selectedMeteorData: MeteorConfig | undefined;
     updateMeteor: (id: string, updates: Partial<MeteorConfig>) => void;
-    filteredIcons: DevIcon[];
+    icons: UnifiedIcon[];
     isLoadingIcons: boolean;
     iconSearch: string;
     setIconSearch: (search: string) => void;
+    fetchDominantColor: (url: string) => Promise<string>;
 }
 
 export function MeteorEditor({
     selectedMeteorData,
     updateMeteor,
-    filteredIcons,
+    icons,
     isLoadingIcons,
     iconSearch,
     setIconSearch,
+    fetchDominantColor,
 }: MeteorEditorProps) {
     return (
         <Card className="flex-1 min-w-0 flex flex-col min-h-0">
@@ -41,9 +42,19 @@ export function MeteorEditor({
                 {selectedMeteorData ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 min-h-0">
                         <div className="space-y-3 flex flex-col min-h-0">
-                            <Label className="shrink-0">Icon (Simple Icons)</Label>
+                            <div className="flex items-center justify-between shrink-0">
+                                <Label>Search Icons</Label>
+                                <a
+                                    href="https://icon-sets.iconify.design/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-xs text-muted-foreground hover:text-primary transition-colors"
+                                >
+                                    Browse Iconify →
+                                </a>
+                            </div>
                             <Input
-                                placeholder="Search icons..."
+                                placeholder="Search 200,000+ icons..."
                                 value={iconSearch}
                                 onChange={(e) => setIconSearch(e.target.value)}
                                 className="shrink-0"
@@ -51,18 +62,33 @@ export function MeteorEditor({
                             <ScrollArea className="flex-1 min-h-0 border rounded-md p-2">
                                 {isLoadingIcons ? (
                                     <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
-                                        Loading icons...
+                                        Searching icons...
+                                    </div>
+                                ) : icons.length === 0 ? (
+                                    <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+                                        No icons found
                                     </div>
                                 ) : (
                                     <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
-                                        {filteredIcons.map((icon) => (
+                                        {icons.map((icon) => (
                                             <button
                                                 key={icon.name}
-                                                onClick={() => {
+                                                onClick={async () => {
+                                                    // Use cached color initially, fetch accurate color async
                                                     updateMeteor(selectedMeteorData.id, {
                                                         iconSlug: icon.name,
                                                         trailColor: icon.color,
+                                                        iconUrl: icon.url,
                                                     });
+                                                    // Fetch accurate dominant color if cached is gray
+                                                    if (icon.color === "#888888") {
+                                                        const accurateColor = await fetchDominantColor(icon.url);
+                                                        if (accurateColor !== "#888888") {
+                                                            updateMeteor(selectedMeteorData.id, {
+                                                                trailColor: accurateColor,
+                                                            });
+                                                        }
+                                                    }
                                                 }}
                                                 className={cn(
                                                     "flex flex-col items-center gap-1 p-2 rounded-md transition-colors hover:bg-muted",
@@ -72,12 +98,13 @@ export function MeteorEditor({
                                                 title={icon.name}
                                             >
                                                 <img
-                                                    src={getDevIconUrl(icon.name)}
-                                                    alt={icon.name}
+                                                    src={icon.url}
+                                                    alt={icon.displayName}
                                                     className="size-6"
+                                                    loading="lazy"
                                                 />
                                                 <span className="text-[9px] text-muted-foreground truncate max-w-full">
-                                                    {icon.name}
+                                                    {icon.displayName}
                                                 </span>
                                             </button>
                                         ))}
@@ -85,7 +112,7 @@ export function MeteorEditor({
                                 )}
                             </ScrollArea>
                             <div className="space-y-1">
-                                <Label className="text-[10px]">Custom Icon Slug</Label>
+                                <Label className="text-[10px]">Icon Name (prefix:name)</Label>
                                 <Input
                                     value={selectedMeteorData.iconSlug}
                                     onChange={(e) =>
@@ -93,7 +120,7 @@ export function MeteorEditor({
                                             iconSlug: e.target.value,
                                         })
                                     }
-                                    placeholder="e.g., react, typescript"
+                                    placeholder="e.g., logos:react, mdi:github"
                                 />
                             </div>
                         </div>
@@ -220,4 +247,3 @@ export function MeteorEditor({
         </Card>
     );
 }
-
