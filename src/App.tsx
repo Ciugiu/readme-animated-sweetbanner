@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useDevIcons } from "./features/shared";
+import { useIconifySearch } from "./features/shared";
 import {
     BannerPreview,
     MeteorEditor,
@@ -20,9 +19,7 @@ export function App() {
         removeMeteor,
     } = useBannerConfig();
 
-    const [iconSearch, setIconSearch] = useState("");
-    const { isLoadingIcons, filterIcons } = useDevIcons();
-    const filteredIcons = filterIcons(iconSearch);
+    const { icons, isLoading, searchQuery, setSearchQuery, fetchSvgDominantColor } = useIconifySearch();
 
     const svgCode = generateSvgCode(config);
     const svgDataUrl = `data:image/svg+xml,${encodeURIComponent(svgCode)}`;
@@ -46,10 +43,11 @@ export function App() {
                 <MeteorEditor
                     selectedMeteorData={selectedMeteorData}
                     updateMeteor={updateMeteor}
-                    filteredIcons={filteredIcons}
-                    isLoadingIcons={isLoadingIcons}
-                    iconSearch={iconSearch}
-                    setIconSearch={setIconSearch}
+                    icons={icons}
+                    isLoadingIcons={isLoading}
+                    iconSearch={searchQuery}
+                    setIconSearch={setSearchQuery}
+                    fetchDominantColor={fetchSvgDominantColor}
                 />
             </div>
         </div>

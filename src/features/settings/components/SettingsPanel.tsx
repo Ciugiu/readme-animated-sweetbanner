@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { BannerConfig } from "@/features/shared";
-import { getDevIconUrl } from "@/features/shared";
+import { getIconUrl } from "@/features/shared";
 
 interface SettingsPanelProps {
     config: BannerConfig;
@@ -325,7 +325,7 @@ export function SettingsPanel({
                                             onClick={() => setSelectedMeteor(meteor.id)}
                                         >
                                             <img
-                                                src={getDevIconUrl(
+                                                src={meteor.iconUrl || getIconUrl(
                                                     meteor.iconSlug
                                                 )}
                                                 alt={meteor.iconSlug}

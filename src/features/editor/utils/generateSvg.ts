@@ -1,5 +1,5 @@
 import type { BannerConfig } from "@/features/shared";
-import { getDevIconUrl } from "@/features/shared";
+import { getIconUrl } from "@/features/shared";
 
 export function generateSvgCode(config: BannerConfig): string {
     const {
@@ -15,7 +15,7 @@ export function generateSvgCode(config: BannerConfig): string {
 
     const meteorsSvg = meteors
         .map((meteor) => {
-            const iconSrc = meteor.iconBase64 || getDevIconUrl(meteor.iconSlug);
+            const iconSrc = meteor.iconBase64 || meteor.iconUrl || getIconUrl(meteor.iconSlug);
             const startY = -50;
             const angleRad = (meteor.angle * Math.PI) / 180;
             const travelDistance = height + 150;

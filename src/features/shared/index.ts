@@ -1,5 +1,4 @@
 export * from "./types";
-export * from "./hooks/useDevIcons";
+export * from "./hooks/useIconifySearch";
 export * from "./utils";
 export * from "./constants";
-
