@@ -69,18 +69,17 @@ export function MeteorEditor({
                                         No icons found
                                     </div>
                                 ) : (
-                                    <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
+                                    <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 m-1">
                                         {icons.map((icon) => (
                                             <button
                                                 key={icon.name}
                                                 onClick={async () => {
-                                                    // Use cached color initially, fetch accurate color async
                                                     updateMeteor(selectedMeteorData.id, {
                                                         iconSlug: icon.name,
                                                         trailColor: icon.color,
                                                         iconUrl: icon.url,
                                                     });
-                                                    // Fetch accurate dominant color if cached is gray
+
                                                     if (icon.color === "#888888") {
                                                         const accurateColor = await fetchDominantColor(icon.url);
                                                         if (accurateColor !== "#888888") {
