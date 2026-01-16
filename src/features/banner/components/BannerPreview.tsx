@@ -12,7 +12,10 @@ import {
     CopyIcon,
     SparklesIcon,
     Star,
+    Sun,
+    Moon,
 } from "lucide-react";
+import { useTheme } from "@/features/shared";
 
 interface BannerPreviewProps {
     svgCode: string;
@@ -21,6 +24,10 @@ interface BannerPreviewProps {
 }
 
 export function BannerPreview({ svgCode, svgDataUrl, width }: BannerPreviewProps) {
+    const { theme, setTheme } = useTheme();
+    const isSystemDark = typeof window !== "undefined" && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = theme === 'dark' || (theme === 'system' && isSystemDark);
+
     const copyToClipboard = useCallback(() => {
         navigator.clipboard.writeText(svgCode);
     }, [svgCode]);
@@ -48,7 +55,18 @@ export function BannerPreview({ svgCode, svgDataUrl, width }: BannerPreviewProps
                             Animated SVG banner with meteor icons
                         </CardDescription>
                     </div>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 items-center">
+                        {/* Theme toggle: sun / moon */}
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setTheme(isDark ? 'light' : 'dark')}
+                            aria-pressed={isDark}
+                            title={isDark ? 'Switch to light' : 'Switch to dark'}
+                        >
+                            {isDark ? <Moon className="size-4" /> : <Sun className="size-4" />}
+                        </Button>
+
                         <Button
                             variant="outline"
                             size="sm"
@@ -92,4 +110,3 @@ export function BannerPreview({ svgCode, svgDataUrl, width }: BannerPreviewProps
         </Card>
     );
 }
-
