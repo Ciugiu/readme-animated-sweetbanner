@@ -67,20 +67,21 @@ bun run build
     ```
 
 ## Icon Libraries
+
 - **[Iconify](https://iconify.design/)** - Icons aggregator. +50k icons
 
 ## Configuration Options
 
-| Setting | Description |
-|---------|-------------|
-| Border | Border size, angle, and color |
-| Background | Solid color background |
-| Avatar | GitHub avatar URL and size |
-| Meteors | Icon, trail color, angle, duration, delay |
-| Particles | Floating particle count and color |
-| Waves | Animated wave gradient colors |
-| Glow | Avatar glow gradient colors |
-| Border | Optional border with radius and size |
+| Setting    | Description                               |
+| ---------- | ----------------------------------------- |
+| Border     | Border size, angle, and color             |
+| Background | Solid color background                    |
+| Avatar     | GitHub avatar URL and size                |
+| Meteors    | Icon, trail color, angle, duration, delay |
+| Particles  | Floating particle count and color         |
+| Waves      | Animated wave gradient colors             |
+| Glow       | Avatar glow gradient colors               |
+| Border     | Optional border with radius and size      |
 
 ## License
 

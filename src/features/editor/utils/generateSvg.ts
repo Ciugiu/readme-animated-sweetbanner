@@ -1,36 +1,50 @@
-import type { BannerConfig } from "@/features/shared";
-import { getIconUrl } from "@/features/shared";
+import type { BannerConfig } from '@/features/shared'
+import { getIconUrl } from '@/features/shared'
 
 export function generateSvgCode(config: BannerConfig): string {
     const {
-        width, height, backgroundColor, avatarUrl, avatarBase64, avatarSize, meteors,
-        particleCount, particleColor,
-        waveColorStart, waveColorMid, waveColorEnd,
-        glowColorStart, glowColorMid, glowColorEnd,
-        borderEnabled, borderColor, borderRadius, borderSize
-    } = config;
-    const centerX = width / 2;
-    const centerY = height / 2;
-    const avatarRadius = avatarSize / 2;
+        width,
+        height,
+        backgroundColor,
+        avatarUrl,
+        avatarBase64,
+        avatarSize,
+        meteors,
+        particleCount,
+        particleColor,
+        waveColorStart,
+        waveColorMid,
+        waveColorEnd,
+        glowColorStart,
+        glowColorMid,
+        glowColorEnd,
+        borderEnabled,
+        borderColor,
+        borderRadius,
+        borderSize,
+    } = config
+    const centerX = width / 2
+    const centerY = height / 2
+    const avatarRadius = avatarSize / 2
 
     const meteorsSvg = meteors
         .map((meteor) => {
-            const iconSrc = meteor.iconBase64 || meteor.iconUrl || getIconUrl(meteor.iconSlug);
-            const startY = -50;
-            const angleRad = (meteor.angle * Math.PI) / 180;
-            const travelDistance = height + 150;
-            const deltaX = Math.cos(angleRad) * travelDistance;
-            const deltaY = Math.sin(angleRad) * travelDistance;
-            const trailLength = 50;
-            const dirX = Math.cos(angleRad) * trailLength;
-            const dirY = Math.sin(angleRad) * trailLength;
-            const lineX1 = meteor.startX;
-            const lineY1 = startY;
-            const lineX2 = meteor.startX + dirX;
-            const lineY2 = startY + dirY;
-            const iconX = lineX2 - 16;
-            const iconY = lineY2 - 16;
-            const filterAttr = meteor.iconColor ? `filter="url(#iconColor-${meteor.id})"` : '';
+            const iconSrc = meteor.iconBase64 || meteor.iconUrl || getIconUrl(meteor.iconSlug)
+            const startY = -50
+            const angleRad = (meteor.angle * Math.PI) / 180
+            const travelDistance = height + 150
+            const deltaX = Math.cos(angleRad) * travelDistance
+            const deltaY = Math.sin(angleRad) * travelDistance
+            const trailLength = 50
+            const dirX = Math.cos(angleRad) * trailLength
+            const dirY = Math.sin(angleRad) * trailLength
+            const lineX1 = meteor.startX
+            const lineY1 = startY
+            const lineX2 = meteor.startX + dirX
+            const lineY2 = startY + dirY
+            const iconX = lineX2 - 16
+            const iconY = lineY2 - 16
+            const filterAttr = meteor.iconColor ? `filter="url(#iconColor-${meteor.id})"` : ''
 
             return `
             <!-- ${meteor.iconSlug} Meteor -->
@@ -46,61 +60,69 @@ export function generateSvgCode(config: BannerConfig): string {
                     <animate attributeName="y" values="${iconY};${iconY + deltaY}" dur="${meteor.duration}s" repeatCount="indefinite" begin="${meteor.delay}s"/>
                 </image>
                 <set attributeName="visibility" to="visible" begin="${meteor.delay}s"/>
-            </g>`;
+            </g>`
         })
-        .join("\n");
+        .join('\n')
 
     const meteorTrailDefs = meteors
         .map((meteor) => {
             const hexToRgb = (hex: string) => {
-                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-                return result ? {
-                    r: parseInt(result[1], 16) / 255,
-                    g: parseInt(result[2], 16) / 255,
-                    b: parseInt(result[3], 16) / 255
-                } : null;
-            };
-            const rgb = meteor.iconColor ? hexToRgb(meteor.iconColor) : null;
+                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+                return result
+                    ? {
+                          r: parseInt(result[1], 16) / 255,
+                          g: parseInt(result[2], 16) / 255,
+                          b: parseInt(result[3], 16) / 255,
+                      }
+                    : null
+            }
+            const rgb = meteor.iconColor ? hexToRgb(meteor.iconColor) : null
 
-            const colorFilter = rgb ? `
+            const colorFilter = rgb
+                ? `
         <filter id="iconColor-${meteor.id}" color-interpolation-filters="sRGB">
             <feColorMatrix type="matrix" values="0 0 0 0 ${rgb.r.toFixed(3)} 0 0 0 0 ${rgb.g.toFixed(3)} 0 0 0 0 ${rgb.b.toFixed(3)} 0 0 0 1 0"/>
-        </filter>` : '';
+        </filter>`
+                : ''
 
             return `
         <linearGradient id="trail-${meteor.id}" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="${meteor.trailColor}" stop-opacity="0"/>
             <stop offset="100%" stop-color="${meteor.trailColor}" stop-opacity="1"/>
-        </linearGradient>${colorFilter}`;
+        </linearGradient>${colorFilter}`
         })
-        .join("\n");
+        .join('\n')
 
-    const waveQ1 = Math.round(width * 0.125);
-    const waveT1 = Math.round(width * 0.25);
-    const waveT2 = Math.round(width * 0.5);
-    const waveT3 = Math.round(width * 0.75);
+    const waveQ1 = Math.round(width * 0.125)
+    const waveT1 = Math.round(width * 0.25)
+    const waveT2 = Math.round(width * 0.5)
+    const waveT3 = Math.round(width * 0.75)
 
-    const waveCenter = Math.round(height * 0.5);
-    const waveAmplitude = Math.round(height * 0.1);
+    const waveCenter = Math.round(height * 0.5)
+    const waveAmplitude = Math.round(height * 0.1)
 
     // Generate particles dynamically based on count
     const particles = Array.from({ length: particleCount }, (_, i) => {
         // Seed random positions across the width
-        const xRatio = (i + 0.5) / particleCount + (Math.sin(i * 2.5) * 0.2);
-        const goingUp = i % 2 === 0;
+        const xRatio = (i + 0.5) / particleCount + Math.sin(i * 2.5) * 0.2
+        const goingUp = i % 2 === 0
         return {
             x: Math.round(width * Math.max(0.1, Math.min(0.9, xRatio))),
             y: goingUp ? Math.round(height * 0.8) : Math.round(height * 0.25),
             yEnd: goingUp ? Math.round(height * 0.2) : Math.round(height * 0.9),
             dur: 5 + (i % 3),
-        };
-    });
+        }
+    })
 
-    const particlesSvg = particles.map((p) => `
+    const particlesSvg = particles
+        .map(
+            (p) => `
         <circle cx="${p.x}" cy="${p.y}" r="2">
             <animate attributeName="cy" values="${p.y};${p.yEnd}" dur="${p.dur}s" repeatCount="indefinite"/>
             <animate attributeName="opacity" values="0;1;0" dur="${p.dur}s" repeatCount="indefinite"/>
-        </circle>`).join('');
+        </circle>`
+        )
+        .join('')
 
     return `<svg xmlns="http://www.w3.org/2000/svg"
      viewBox="0 0 ${width} ${height}"
@@ -213,13 +235,16 @@ export function generateSvgCode(config: BannerConfig): string {
         ${particlesSvg}
     </g>
 
-    ${borderEnabled ? `<!-- Border -->
+    ${
+        borderEnabled
+            ? `<!-- Border -->
     <rect x="${borderSize / 2}" y="${borderSize / 2}" 
           width="${width - borderSize}" height="${height - borderSize}" 
           rx="${borderRadius}" ry="${borderRadius}"
           fill="none" 
           stroke="${borderColor}" 
-          stroke-width="${borderSize}"/>` : ''}
-</svg>`;
+          stroke-width="${borderSize}"/>`
+            : ''
+    }
+</svg>`
 }
-

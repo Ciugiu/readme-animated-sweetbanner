@@ -1,32 +1,23 @@
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import { Slider } from "@/components/ui/slider";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-    Trash2Icon,
-    PlusIcon,
-    ImageIcon,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-import type { BannerConfig } from "@/features/shared";
-import { getIconUrl } from "@/features/shared";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Separator } from '@/components/ui/separator'
+import { Slider } from '@/components/ui/slider'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Trash2Icon, PlusIcon, ImageIcon } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import type { BannerConfig } from '@/features/shared'
+import { getIconUrl } from '@/features/shared'
 
 interface SettingsPanelProps {
-    config: BannerConfig;
-    selectedMeteor: string | null;
-    setSelectedMeteor: (id: string | null) => void;
-    updateConfig: (updates: Partial<BannerConfig>) => void;
-    addMeteor: () => void;
-    removeMeteor: (id: string) => void;
+    config: BannerConfig
+    selectedMeteor: string | null
+    setSelectedMeteor: (id: string | null) => void
+    updateConfig: (updates: Partial<BannerConfig>) => void
+    addMeteor: () => void
+    removeMeteor: (id: string) => void
 }
 
 export function SettingsPanel({
@@ -61,16 +52,12 @@ export function SettingsPanel({
                                 <Input
                                     type="color"
                                     value={config.backgroundColor}
-                                    onChange={(e) =>
-                                        updateConfig({ backgroundColor: e.target.value })
-                                    }
+                                    onChange={(e) => updateConfig({ backgroundColor: e.target.value })}
                                     className="w-10 h-7 p-0.5 cursor-pointer"
                                 />
                                 <Input
                                     value={config.backgroundColor}
-                                    onChange={(e) =>
-                                        updateConfig({ backgroundColor: e.target.value })
-                                    }
+                                    onChange={(e) => updateConfig({ backgroundColor: e.target.value })}
                                     className="flex-1"
                                 />
                             </div>
@@ -109,9 +96,7 @@ export function SettingsPanel({
                                 <Input
                                     type="number"
                                     value={config.width}
-                                    onChange={(e) =>
-                                        updateConfig({ width: parseInt(e.target.value) || 800 })
-                                    }
+                                    onChange={(e) => updateConfig({ width: parseInt(e.target.value) || 800 })}
                                 />
                             </div>
                             <div className="space-y-1">
@@ -143,16 +128,12 @@ export function SettingsPanel({
                                 <Input
                                     type="color"
                                     value={config.particleColor}
-                                    onChange={(e) =>
-                                        updateConfig({ particleColor: e.target.value })
-                                    }
+                                    onChange={(e) => updateConfig({ particleColor: e.target.value })}
                                     className="w-10 h-7 p-0.5 cursor-pointer"
                                 />
                                 <Input
                                     value={config.particleColor}
-                                    onChange={(e) =>
-                                        updateConfig({ particleColor: e.target.value })
-                                    }
+                                    onChange={(e) => updateConfig({ particleColor: e.target.value })}
                                     className="flex-1"
                                     placeholder="Particle color"
                                 />
@@ -167,27 +148,21 @@ export function SettingsPanel({
                                 <Input
                                     type="color"
                                     value={config.waveColorStart}
-                                    onChange={(e) =>
-                                        updateConfig({ waveColorStart: e.target.value })
-                                    }
+                                    onChange={(e) => updateConfig({ waveColorStart: e.target.value })}
                                     className="w-8 h-7 p-0.5 cursor-pointer flex-1"
                                     title="Start color"
                                 />
                                 <Input
                                     type="color"
                                     value={config.waveColorMid}
-                                    onChange={(e) =>
-                                        updateConfig({ waveColorMid: e.target.value })
-                                    }
+                                    onChange={(e) => updateConfig({ waveColorMid: e.target.value })}
                                     className="w-8 h-7 p-0.5 cursor-pointer flex-1"
                                     title="Middle color"
                                 />
                                 <Input
                                     type="color"
                                     value={config.waveColorEnd}
-                                    onChange={(e) =>
-                                        updateConfig({ waveColorEnd: e.target.value })
-                                    }
+                                    onChange={(e) => updateConfig({ waveColorEnd: e.target.value })}
                                     className="w-8 h-7 p-0.5 cursor-pointer flex-1"
                                     title="End color"
                                 />
@@ -202,27 +177,21 @@ export function SettingsPanel({
                                 <Input
                                     type="color"
                                     value={config.glowColorStart}
-                                    onChange={(e) =>
-                                        updateConfig({ glowColorStart: e.target.value })
-                                    }
+                                    onChange={(e) => updateConfig({ glowColorStart: e.target.value })}
                                     className="w-8 h-7 p-0.5 cursor-pointer flex-1"
                                     title="Start color"
                                 />
                                 <Input
                                     type="color"
                                     value={config.glowColorMid}
-                                    onChange={(e) =>
-                                        updateConfig({ glowColorMid: e.target.value })
-                                    }
+                                    onChange={(e) => updateConfig({ glowColorMid: e.target.value })}
                                     className="w-8 h-7 p-0.5 cursor-pointer flex-1"
                                     title="Middle color"
                                 />
                                 <Input
                                     type="color"
                                     value={config.glowColorEnd}
-                                    onChange={(e) =>
-                                        updateConfig({ glowColorEnd: e.target.value })
-                                    }
+                                    onChange={(e) => updateConfig({ glowColorEnd: e.target.value })}
                                     className="w-8 h-7 p-0.5 cursor-pointer flex-1"
                                     title="End color"
                                 />
@@ -237,9 +206,7 @@ export function SettingsPanel({
                                     type="checkbox"
                                     id="borderEnabled"
                                     checked={config.borderEnabled}
-                                    onChange={(e) =>
-                                        updateConfig({ borderEnabled: e.target.checked })
-                                    }
+                                    onChange={(e) => updateConfig({ borderEnabled: e.target.checked })}
                                     className="size-4 cursor-pointer"
                                 />
                                 <Label htmlFor="borderEnabled" className="cursor-pointer">
@@ -252,43 +219,31 @@ export function SettingsPanel({
                                         <Input
                                             type="color"
                                             value={config.borderColor}
-                                            onChange={(e) =>
-                                                updateConfig({ borderColor: e.target.value })
-                                            }
+                                            onChange={(e) => updateConfig({ borderColor: e.target.value })}
                                             className="w-10 h-7 p-0.5 cursor-pointer"
                                         />
                                         <Input
                                             value={config.borderColor}
-                                            onChange={(e) =>
-                                                updateConfig({ borderColor: e.target.value })
-                                            }
+                                            onChange={(e) => updateConfig({ borderColor: e.target.value })}
                                             className="flex-1"
                                             placeholder="Border color"
                                         />
                                     </div>
                                     <div className="space-y-1">
-                                        <Label className="text-[10px]">
-                                            Radius: {config.borderRadius}px
-                                        </Label>
+                                        <Label className="text-[10px]">Radius: {config.borderRadius}px</Label>
                                         <Slider
                                             value={[config.borderRadius]}
-                                            onValueChange={([v]) =>
-                                                updateConfig({ borderRadius: v })
-                                            }
+                                            onValueChange={([v]) => updateConfig({ borderRadius: v })}
                                             min={0}
                                             max={50}
                                             step={1}
                                         />
                                     </div>
                                     <div className="space-y-1">
-                                        <Label className="text-[10px]">
-                                            Size: {config.borderSize}px
-                                        </Label>
+                                        <Label className="text-[10px]">Size: {config.borderSize}px</Label>
                                         <Slider
                                             value={[config.borderSize]}
-                                            onValueChange={([v]) =>
-                                                updateConfig({ borderSize: v })
-                                            }
+                                            onValueChange={([v]) => updateConfig({ borderSize: v })}
                                             min={1}
                                             max={10}
                                             step={1}
@@ -301,12 +256,7 @@ export function SettingsPanel({
 
                     <TabsContent value="meteors" className="mt-4 flex-1 flex flex-col min-h-0">
                         <div className="space-y-2 flex-1 flex flex-col min-h-0">
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                className="w-full shrink-0"
-                                onClick={addMeteor}
-                            >
+                            <Button variant="outline" size="sm" className="w-full shrink-0" onClick={addMeteor}>
                                 <PlusIcon className="size-3.5" />
                                 Add Meteor
                             </Button>
@@ -317,23 +267,19 @@ export function SettingsPanel({
                                         <div
                                             key={meteor.id}
                                             className={cn(
-                                                "flex items-center gap-2 rounded-md border p-2 cursor-pointer transition-colors",
+                                                'flex items-center gap-2 rounded-md border p-2 cursor-pointer transition-colors',
                                                 selectedMeteor === meteor.id
-                                                    ? "border-primary bg-primary/5"
-                                                    : "hover:bg-muted/50"
+                                                    ? 'border-primary bg-primary/5'
+                                                    : 'hover:bg-muted/50'
                                             )}
                                             onClick={() => setSelectedMeteor(meteor.id)}
                                         >
                                             <img
-                                                src={meteor.iconUrl || getIconUrl(
-                                                    meteor.iconSlug
-                                                )}
+                                                src={meteor.iconUrl || getIconUrl(meteor.iconSlug)}
                                                 alt={meteor.iconSlug}
                                                 className="size-5"
                                             />
-                                            <span className="flex-1 text-xs truncate">
-                                                Meteor {index + 1}
-                                            </span>
+                                            <span className="flex-1 text-xs truncate">Meteor {index + 1}</span>
                                             <div
                                                 className="size-3 rounded-full border"
                                                 style={{ backgroundColor: meteor.trailColor }}
@@ -342,8 +288,8 @@ export function SettingsPanel({
                                                 variant="ghost"
                                                 size="icon-xs"
                                                 onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    removeMeteor(meteor.id);
+                                                    e.stopPropagation()
+                                                    removeMeteor(meteor.id)
                                                 }}
                                             >
                                                 <Trash2Icon className="size-3 text-destructive" />
@@ -357,5 +303,5 @@ export function SettingsPanel({
                 </Tabs>
             </CardContent>
         </Card>
-    );
+    )
 }
