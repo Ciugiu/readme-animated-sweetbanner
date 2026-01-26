@@ -1,25 +1,20 @@
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import { Slider } from "@/components/ui/slider";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
-import type { MeteorConfig, UnifiedIcon } from "@/features/shared";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Separator } from '@/components/ui/separator'
+import { Slider } from '@/components/ui/slider'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { cn } from '@/lib/utils'
+import type { MeteorConfig, UnifiedIcon } from '@/features/shared'
 
 interface MeteorEditorProps {
-    selectedMeteorData: MeteorConfig | undefined;
-    updateMeteor: (id: string, updates: Partial<MeteorConfig>) => void;
-    icons: UnifiedIcon[];
-    isLoadingIcons: boolean;
-    iconSearch: string;
-    setIconSearch: (search: string) => void;
-    fetchDominantColor: (url: string) => Promise<string>;
+    selectedMeteorData: MeteorConfig | undefined
+    updateMeteor: (id: string, updates: Partial<MeteorConfig>) => void
+    icons: UnifiedIcon[]
+    isLoadingIcons: boolean
+    iconSearch: string
+    setIconSearch: (search: string) => void
+    fetchDominantColor: (url: string) => Promise<string>
 }
 
 export function MeteorEditor({
@@ -34,9 +29,7 @@ export function MeteorEditor({
     return (
         <Card className="flex-1 min-w-0 flex flex-col min-h-0">
             <CardHeader className="pb-2 shrink-0">
-                <CardTitle className="text-sm">
-                    {selectedMeteorData ? "Edit Meteor" : "Select a Meteor"}
-                </CardTitle>
+                <CardTitle className="text-sm">{selectedMeteorData ? 'Edit Meteor' : 'Select a Meteor'}</CardTitle>
             </CardHeader>
             <CardContent className="flex-1 flex flex-col min-h-0">
                 {selectedMeteorData ? (
@@ -78,21 +71,21 @@ export function MeteorEditor({
                                                         iconSlug: icon.name,
                                                         trailColor: icon.color,
                                                         iconUrl: icon.url,
-                                                    });
+                                                    })
 
-                                                    if (icon.color === "#888888") {
-                                                        const accurateColor = await fetchDominantColor(icon.url);
-                                                        if (accurateColor !== "#888888") {
+                                                    if (icon.color === '#888888') {
+                                                        const accurateColor = await fetchDominantColor(icon.url)
+                                                        if (accurateColor !== '#888888') {
                                                             updateMeteor(selectedMeteorData.id, {
                                                                 trailColor: accurateColor,
-                                                            });
+                                                            })
                                                         }
                                                     }
                                                 }}
                                                 className={cn(
-                                                    "flex flex-col items-center gap-1 p-2 rounded-md transition-colors hover:bg-muted",
+                                                    'flex flex-col items-center gap-1 p-2 rounded-md transition-colors hover:bg-muted',
                                                     selectedMeteorData.iconSlug === icon.name &&
-                                                    "bg-primary/10 ring-1 ring-primary"
+                                                        'bg-primary/10 ring-1 ring-primary'
                                                 )}
                                                 title={icon.name}
                                             >
@@ -176,14 +169,10 @@ export function MeteorEditor({
                             <Separator />
 
                             <div className="space-y-1">
-                                <Label>
-                                    Duration: {selectedMeteorData.duration.toFixed(1)}s
-                                </Label>
+                                <Label>Duration: {selectedMeteorData.duration.toFixed(1)}s</Label>
                                 <Slider
                                     value={[selectedMeteorData.duration]}
-                                    onValueChange={([v]) =>
-                                        updateMeteor(selectedMeteorData.id, { duration: v })
-                                    }
+                                    onValueChange={([v]) => updateMeteor(selectedMeteorData.id, { duration: v })}
                                     min={0.5}
                                     max={5}
                                     step={0.1}
@@ -191,14 +180,10 @@ export function MeteorEditor({
                             </div>
 
                             <div className="space-y-1">
-                                <Label>
-                                    Delay: {selectedMeteorData.delay.toFixed(1)}s
-                                </Label>
+                                <Label>Delay: {selectedMeteorData.delay.toFixed(1)}s</Label>
                                 <Slider
                                     value={[selectedMeteorData.delay]}
-                                    onValueChange={([v]) =>
-                                        updateMeteor(selectedMeteorData.id, { delay: v })
-                                    }
+                                    onValueChange={([v]) => updateMeteor(selectedMeteorData.id, { delay: v })}
                                     min={0}
                                     max={5}
                                     step={0.1}
@@ -244,5 +229,5 @@ export function MeteorEditor({
                 )}
             </CardContent>
         </Card>
-    );
+    )
 }

@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Star } from 'lucide-react'
 
 export function GithubStar() {
     return (
@@ -11,6 +11,5 @@ export function GithubStar() {
             <Star className="w-4 h-4 text-amber-400 fill-amber-400 group-hover:animate-pulse" />
             <span className="text-sm font-medium">Star on GitHub</span>
         </a>
-    );
+    )
 }
-

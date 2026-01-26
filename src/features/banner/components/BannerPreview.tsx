@@ -1,46 +1,34 @@
-import { useCallback } from "react";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import {
-    DownloadIcon,
-    CopyIcon,
-    SparklesIcon,
-    Star,
-    Sun,
-    Moon,
-} from "lucide-react";
-import { useTheme } from "@/features/shared";
+import { useCallback } from 'react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card.tsx'
+import { Button } from '@/components/ui/button.tsx'
+import { DownloadIcon, CopyIcon, SparklesIcon, Star, Sun, Moon } from 'lucide-react'
+import { useTheme } from '@/features/shared'
 
 interface BannerPreviewProps {
-    svgCode: string;
-    svgDataUrl: string;
-    width: number;
+    svgCode: string
+    svgDataUrl: string
+    width: number
 }
 
 export function BannerPreview({ svgCode, svgDataUrl, width }: BannerPreviewProps) {
-    const { theme, setTheme } = useTheme();
-    const isSystemDark = typeof window !== "undefined" && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isDark = theme === 'dark' || (theme === 'system' && isSystemDark);
+    const { theme, setTheme } = useTheme()
+    const isSystemDark =
+        typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isDark = theme === 'dark' || (theme === 'system' && isSystemDark)
 
     const copyToClipboard = useCallback(() => {
-        navigator.clipboard.writeText(svgCode);
-    }, [svgCode]);
+        navigator.clipboard.writeText(svgCode)
+    }, [svgCode])
 
     const downloadSvg = useCallback(() => {
-        const blob = new Blob([svgCode], { type: "image/svg+xml" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "banner.svg";
-        a.click();
-        URL.revokeObjectURL(url);
-    }, [svgCode]);
+        const blob = new Blob([svgCode], { type: 'image/svg+xml' })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = 'banner.svg'
+        a.click()
+        URL.revokeObjectURL(url)
+    }, [svgCode])
 
     return (
         <Card className="shrink-0">
@@ -51,9 +39,7 @@ export function BannerPreview({ svgCode, svgDataUrl, width }: BannerPreviewProps
                             <SparklesIcon className="size-4" />
                             Banner Preview
                         </CardTitle>
-                        <CardDescription>
-                            Animated SVG banner with meteor icons
-                        </CardDescription>
+                        <CardDescription>Animated SVG banner with meteor icons</CardDescription>
                     </div>
                     <div className="flex flex-wrap gap-2 items-center">
                         {/* Theme toggle: sun / moon */}
@@ -94,19 +80,12 @@ export function BannerPreview({ svgCode, svgDataUrl, width }: BannerPreviewProps
                 </div>
             </CardHeader>
             <CardContent>
-                <div
-                    className="overflow-hidden rounded-lg mx-auto"
-                    style={{ maxWidth: width }}
-                >
+                <div className="overflow-hidden rounded-lg mx-auto" style={{ maxWidth: width }}>
                     <div className="flex items-center gap-2">
-                        <img
-                            src={svgDataUrl}
-                            alt="Banner Preview"
-                            className="w-full h-auto"
-                        />
+                        <img src={svgDataUrl} alt="Banner Preview" className="w-full h-auto" />
                     </div>
                 </div>
             </CardContent>
         </Card>
-    );
+    )
 }
