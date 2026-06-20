@@ -1,17 +1,21 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card.tsx'
 import { Button } from '@/components/ui/button.tsx'
-import { DownloadIcon, CopyIcon, SparklesIcon, Star, Sun, Moon } from 'lucide-react'
+import { DownloadIcon, CopyIcon, SparklesIcon, Star, Sun, Moon, UploadIcon } from 'lucide-react'
 import { useTheme } from '@/features/shared'
+import type { BannerConfig } from '@/features/shared'
+import { ImportBanner } from '@/features/editor/components/ImportBanner'
 
 interface BannerPreviewProps {
     svgCode: string
     svgDataUrl: string
     width: number
+    onImport: (config: BannerConfig) => void
 }
 
-export function BannerPreview({ svgCode, svgDataUrl, width }: BannerPreviewProps) {
+export function BannerPreview({ svgCode, svgDataUrl, width, onImport }: BannerPreviewProps) {
     const { theme, setTheme } = useTheme()
+    const [showImport, setShowImport] = useState(false)
     const isSystemDark =
         typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     const isDark = theme === 'dark' || (theme === 'system' && isSystemDark)
@@ -68,6 +72,14 @@ export function BannerPreview({ svgCode, svgDataUrl, width }: BannerPreviewProps
                                 Star on GitHub
                             </a>
                         </Button>
+                        <Button
+                            variant={showImport ? 'secondary' : 'outline'}
+                            size="sm"
+                            onClick={() => setShowImport((v) => !v)}
+                        >
+                            <UploadIcon className="size-3.5" />
+                            Import
+                        </Button>
                         <Button variant="outline" size="sm" onClick={copyToClipboard}>
                             <CopyIcon className="size-3.5" />
                             Copy SVG
@@ -78,6 +90,7 @@ export function BannerPreview({ svgCode, svgDataUrl, width }: BannerPreviewProps
                         </Button>
                     </div>
                 </div>
+                {showImport && <ImportBanner onImport={onImport} onClose={() => setShowImport(false)} />}
             </CardHeader>
             <CardContent>
                 <div className="overflow-hidden rounded-lg mx-auto" style={{ maxWidth: width }}>

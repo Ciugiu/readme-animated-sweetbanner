@@ -214,6 +214,15 @@ export function useBannerConfig() {
         setSelectedMeteor(null)
     }, [])
 
+    const importConfig = useCallback((newConfig: BannerConfig) => {
+        setConfig({
+            ...newConfig,
+            avatarBase64: undefined,
+            meteors: newConfig.meteors.map((m) => ({ ...m, iconBase64: undefined })),
+        })
+        setSelectedMeteor(newConfig.meteors[0]?.id ?? null)
+    }, [])
+
     const selectedMeteorData = config.meteors.find((m) => m.id === selectedMeteor)
 
     return {
@@ -225,5 +234,6 @@ export function useBannerConfig() {
         updateMeteor,
         addMeteor,
         removeMeteor,
+        importConfig,
     }
 }

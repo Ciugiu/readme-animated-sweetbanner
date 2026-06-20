@@ -12,6 +12,7 @@ export function App() {
         updateMeteor,
         addMeteor,
         removeMeteor,
+        importConfig,
     } = useBannerConfig()
 
     const { icons, isLoading, searchQuery, setSearchQuery, fetchSvgDominantColor } = useIconifySearch()
@@ -21,7 +22,7 @@ export function App() {
 
     return (
         <div className="flex min-h-screen w-full flex-col gap-4 p-2 sm:p-4 bg-background">
-            <BannerPreview svgCode={svgCode} svgDataUrl={svgDataUrl} width={config.width} />
+            <BannerPreview svgCode={svgCode} svgDataUrl={svgDataUrl} width={config.width} onImport={importConfig} />
             <div className="flex flex-col lg:flex-row flex-1 gap-4 min-h-0">
                 <SettingsPanel
                     config={config}

@@ -23,6 +23,13 @@ export function generateSvgCode(config: BannerConfig): string {
         borderRadius,
         borderSize,
     } = config
+
+    const { avatarBase64: _ab, ...configWithoutAvatar } = config
+    const exportConfig = {
+        ...configWithoutAvatar,
+        meteors: meteors.map(({ iconBase64: _ib, ...m }) => m),
+    }
+    const metadata = `<metadata><![CDATA[${JSON.stringify(exportConfig)}]]></metadata>`
     const centerX = width / 2
     const centerY = height / 2
     const avatarRadius = avatarSize / 2
@@ -129,6 +136,8 @@ export function generateSvgCode(config: BannerConfig): string {
      width="${width}"
      height="${height}"
      style="background:${backgroundColor}">
+
+    ${metadata}
 
     <defs>
         <!-- Glow -->
