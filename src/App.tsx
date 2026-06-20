@@ -39,6 +39,7 @@ export function App() {
                     iconSearch={searchQuery}
                     setIconSearch={setSearchQuery}
                     fetchDominantColor={fetchSvgDominantColor}
+                    backgroundColor={config.backgroundColor}
                 />
             </div>
         </div>

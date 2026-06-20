@@ -6,6 +6,96 @@ import { Slider } from '@/components/ui/slider'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
 import type { MeteorConfig, UnifiedIcon } from '@/features/shared'
+import { getIconUrl } from '@/features/shared'
+
+function MeteorPreview({ meteor, backgroundColor }: { meteor: MeteorConfig; backgroundColor: string }) {
+    const pw = 220
+    const ph = 110
+    const iconSrc = meteor.iconBase64 || meteor.iconUrl || getIconUrl(meteor.iconSlug)
+    const angleRad = (meteor.angle * Math.PI) / 180
+    const trailLength = 50
+    const dirX = Math.cos(angleRad) * trailLength
+    const dirY = Math.sin(angleRad) * trailLength
+    // Icon centered in preview
+    const iconX = pw / 2 - 16
+    const iconY = ph / 2 - 16
+    // Trail tail is behind the icon (opposite direction of travel)
+    const lineX1 = pw / 2 - dirX
+    const lineY1 = ph / 2 - dirY
+    const lineX2 = pw / 2
+    const lineY2 = ph / 2
+
+    const hexToRgb = (hex: string) => {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+        return result
+            ? {
+                  r: parseInt(result[1], 16) / 255,
+                  g: parseInt(result[2], 16) / 255,
+                  b: parseInt(result[3], 16) / 255,
+              }
+            : null
+    }
+    const rgb = meteor.iconColor ? hexToRgb(meteor.iconColor) : null
+
+    return (
+        <svg
+            viewBox={`0 0 ${pw} ${ph}`}
+            width="100%"
+            height={ph}
+            style={{ background: backgroundColor, borderRadius: '6px' }}
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <defs>
+                <linearGradient
+                    id="prev-trail"
+                    x1={lineX1}
+                    y1={lineY1}
+                    x2={lineX2}
+                    y2={lineY2}
+                    gradientUnits="userSpaceOnUse"
+                >
+                    <stop offset="0%" stopColor={meteor.trailColor} stopOpacity={0} />
+                    <stop offset="100%" stopColor={meteor.trailColor} stopOpacity={1} />
+                </linearGradient>
+                <filter id="prev-glow">
+                    <feGaussianBlur stdDeviation="2" result="blur" />
+                    <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                {rgb && (
+                    <filter id="prev-color" colorInterpolationFilters="sRGB">
+                        <feColorMatrix
+                            type="matrix"
+                            values={`0 0 0 0 ${rgb.r.toFixed(3)} 0 0 0 0 ${rgb.g.toFixed(3)} 0 0 0 0 ${rgb.b.toFixed(3)} 0 0 0 1 0`}
+                        />
+                    </filter>
+                )}
+            </defs>
+            <g filter="url(#prev-glow)">
+                <line
+                    x1={lineX1}
+                    y1={lineY1}
+                    x2={lineX2}
+                    y2={lineY2}
+                    stroke="url(#prev-trail)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                />
+                <image
+                    href={iconSrc}
+                    width="32"
+                    height="32"
+                    x={iconX}
+                    y={iconY}
+                    {...(rgb ? { filter: 'url(#prev-color)' } : {})}
+                />
+            </g>
+        </svg>
+    )
+}
 
 interface MeteorEditorProps {
     selectedMeteorData: MeteorConfig | undefined
@@ -15,6 +105,7 @@ interface MeteorEditorProps {
     iconSearch: string
     setIconSearch: (search: string) => void
     fetchDominantColor: (url: string) => Promise<string>
+    backgroundColor: string
 }
 
 export function MeteorEditor({
@@ -25,6 +116,7 @@ export function MeteorEditor({
     iconSearch,
     setIconSearch,
     fetchDominantColor,
+    backgroundColor,
 }: MeteorEditorProps) {
     return (
         <Card className="flex-1 min-w-0 flex flex-col min-h-0">
@@ -219,6 +311,11 @@ export function MeteorEditor({
                                         }
                                     />
                                 </div>
+                            </div>
+
+                            <div className="space-y-1">
+                                <Label className="text-[10px]">Meteor Preview</Label>
+                                <MeteorPreview meteor={selectedMeteorData} backgroundColor={backgroundColor} />
                             </div>
                         </div>
                     </div>
